@@ -177,7 +177,7 @@
         }
 
         // * If the url suffix is avif or webp, we assume it's an animated webp.
-        if ([_source.url hasSuffix:@"webp"] || [_source.url hasSuffix:@"avif"]) {
+        if ([_source.url.absoluteString hasSuffix:@"webp"] || [_source.url.absoluteString hasSuffix:@"avif"]) {
             options |= SDWebImageProgressiveLoad;
         }
 
