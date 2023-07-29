@@ -1,26 +1,27 @@
-import React, { Component } from 'react'
-import {
-    StyleSheet,
-    View,
-    Text,
-    TouchableOpacity,
-    ViewProps,
-} from 'react-native'
-import FastImage, { FastImageProps, Source } from 'react-native-fast-image'
-import Section from './Section'
-import FeatureText from './FeatureText'
-import FieldsBase64 from './images/fields'
-import { launchImageLibrary } from 'react-native-image-picker'
-import BulletText from './BulletText'
+import React, { Component } from 'react';
 
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ViewProps,
+} from 'react-native';
+import FastImage, { FastImageProps, Source } from 'react-native-fast-image';
+import { launchImageLibrary } from 'react-native-image-picker';
+
+import BulletText from './BulletText';
+import FeatureText from './FeatureText';
+import FieldsBase64 from './images/fields';
 // @ts-ignore
-import FieldsImage from './images/fields.jpg'
+import FieldsImage from './images/fields.jpg';
 // @ts-ignore
-import FieldsWebP from './images/fields.webp'
+import FieldsWebP from './images/fields.webp';
 // @ts-ignore
-import JellyfishGIF from './images/jellyfish.gif'
+import JellyfishGIF from './images/jellyfish.gif';
 // @ts-ignore
-import JellyfishWebP from './images/jellyfish.webp'
+import JellyfishWebP from './images/jellyfish.webp';
+import Section from './Section';
 
 const Image = ({ source, ...p }: FastImageProps) => (
     <FastImage style={styles.imageSquare} source={source} {...p} />
@@ -92,6 +93,7 @@ export const LocalImagesExample = () => (
             <Example name="Require" source={require('./images/fields.jpg')} />
             <Example name="Import" source={FieldsImage} />
             <Example name="GIF" source={JellyfishGIF} />
+            <Example name="AVIF" source={require("./images/food.avif")} />
             <Example name="Animated WebP" source={JellyfishWebP} />
             <Example name="Base64" source={{ uri: FieldsBase64 }} />
             <Example name="WebP" source={FieldsWebP} />
