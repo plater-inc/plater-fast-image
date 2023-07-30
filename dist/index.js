@@ -3,23 +3,23 @@ import React, { forwardRef, memo } from 'react';
 import { NativeModules, StyleSheet, requireNativeComponent, Image, View, Platform } from 'react-native';
 
 const resizeMode = {
-  contain: 'contain',
-  cover: 'cover',
-  stretch: 'stretch',
-  center: 'center'
+  contain: "contain",
+  cover: "cover",
+  stretch: "stretch",
+  center: "center"
 };
 const priority = {
-  low: 'low',
-  normal: 'normal',
-  high: 'high'
+  low: "low",
+  normal: "normal",
+  high: "high"
 };
 const cacheControl = {
   // Ignore headers, use uri as cache key, fetch only if not in cache.
-  immutable: 'immutable',
+  immutable: "immutable",
   // Respect http headers, no aggressive caching.
-  web: 'web',
+  web: "web",
   // Only load from cache.
-  cacheOnly: 'cacheOnly'
+  cacheOnly: "cacheOnly"
 };
 
 const resolveDefaultSource = defaultSource => {
@@ -27,7 +27,7 @@ const resolveDefaultSource = defaultSource => {
     return null;
   }
 
-  if (Platform.OS === 'android') {
+  if (Platform.OS === "android") {
     // Android receives a URI string, and resolves into a Drawable using RN's methods.
     const resolved = Image.resolveAssetSource(defaultSource);
 
@@ -56,7 +56,7 @@ function FastImageBase({
   fallback,
   children,
   // eslint-disable-next-line no-shadow
-  resizeMode = 'cover',
+  resizeMode = "cover",
   forwardedRef,
   ...props
 }) {
@@ -106,7 +106,7 @@ const FastImageMemo = /*#__PURE__*/memo(FastImageBase);
 const FastImageComponent = /*#__PURE__*/forwardRef((props, ref) => /*#__PURE__*/React.createElement(FastImageMemo, _extends({
   forwardedRef: ref
 }, props)));
-FastImageComponent.displayName = 'FastImage';
+FastImageComponent.displayName = "FastImage";
 const FastImage = FastImageComponent;
 FastImage.resizeMode = resizeMode;
 FastImage.cacheControl = cacheControl;
@@ -120,11 +120,11 @@ FastImage.clearDiskCache = () => NativeModules.FastImageView.clearDiskCache();
 
 const styles = StyleSheet.create({
   imageContainer: {
-    overflow: 'hidden'
+    overflow: "hidden"
   }
 }); // Types of requireNativeComponent are not correct.
 
-const FastImageView = requireNativeComponent('FastImageView', FastImage, {
+const FastImageView = requireNativeComponent("FastImageView", FastImage, {
   nativeOnly: {
     onFastImageLoadStart: true,
     onFastImageProgress: true,

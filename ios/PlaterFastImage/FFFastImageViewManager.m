@@ -1,5 +1,8 @@
 #import "FFFastImageViewManager.h"
 #import "FFFastImageView.h"
+#import <SDWebImage/SDImageCoder.h>
+#import <SDImageAVIFCoder.h>
+#import <SDImageWebPCoder.h>
 
 #import <SDWebImage/SDImageCache.h>
 #import <SDWebImage/SDWebImagePrefetcher.h>
@@ -21,6 +24,12 @@ RCT_EXPORT_VIEW_PROPERTY(onFastImageError, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onFastImageLoad, RCTDirectEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onFastImageLoadEnd, RCTDirectEventBlock)
 RCT_REMAP_VIEW_PROPERTY(tintColor, imageColor, UIColor)
+
+RCT_EXPORT_METHOD(addCoders)
+{
+    [SDImageCodersManager.sharedManager addCoder:SDImageAVIFCoder.sharedCoder];
+    [SDImageCodersManager.sharedManager addCoder:SDImageAVIFCoder.sharedCoder];
+}
 
 RCT_EXPORT_METHOD(preload:(nonnull NSArray<FFFastImageSource *> *)sources)
 {

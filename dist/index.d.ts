@@ -1,19 +1,19 @@
-import React from 'react';
-import { FlexStyle, LayoutChangeEvent, ShadowStyleIOS, StyleProp, TransformsStyle, ImageRequireSource, AccessibilityProps, ViewProps, ColorValue } from 'react-native';
-export declare type ResizeMode = 'contain' | 'cover' | 'stretch' | 'center';
+import React from "react";
+import { AccessibilityProps, ColorValue, FlexStyle, ImageRequireSource, LayoutChangeEvent, ShadowStyleIOS, StyleProp, TransformsStyle, ViewProps } from "react-native";
+export declare type ResizeMode = "contain" | "cover" | "stretch" | "center";
 declare const resizeMode: {
     readonly contain: "contain";
     readonly cover: "cover";
     readonly stretch: "stretch";
     readonly center: "center";
 };
-export declare type Priority = 'low' | 'normal' | 'high';
+export declare type Priority = "low" | "normal" | "high";
 declare const priority: {
     readonly low: "low";
     readonly normal: "normal";
     readonly high: "high";
 };
-declare type Cache = 'immutable' | 'web' | 'cacheOnly';
+declare type Cache = "immutable" | "web" | "cacheOnly";
 declare const cacheControl: {
     readonly immutable: "immutable";
     readonly web: "web";
@@ -40,7 +40,7 @@ export interface OnProgressEvent {
     };
 }
 export interface ImageStyle extends FlexStyle, TransformsStyle, ShadowStyleIOS {
-    backfaceVisibility?: 'visible' | 'hidden';
+    backfaceVisibility?: "visible" | "hidden";
     borderBottomLeftRadius?: number;
     borderBottomRightRadius?: number;
     backgroundColor?: string;
@@ -94,6 +94,7 @@ export interface FastImageStaticProperties {
     resizeMode: typeof resizeMode;
     priority: typeof priority;
     cacheControl: typeof cacheControl;
+    addCoders: () => void;
     preload: (sources: Source[]) => void;
     clearMemoryCache: () => Promise<void>;
     clearDiskCache: () => Promise<void>;

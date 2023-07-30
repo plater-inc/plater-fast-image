@@ -150,6 +150,7 @@
             return;
         }
 
+
         // Set headers.
         NSDictionary* headers = _source.headers;
         SDWebImageDownloaderRequestModifier* requestModifier = [SDWebImageDownloaderRequestModifier requestModifierWithBlock: ^NSURLRequest* _Nullable (NSURLRequest* _Nonnull request) {
@@ -161,6 +162,7 @@
             return [mutableRequest copy];
         }];
         SDWebImageContext* context = @{SDWebImageContextDownloadRequestModifier: requestModifier};
+
 
         // Set priority.
         SDWebImageOptions options = SDWebImageRetryFailed | SDWebImageHandleCookies;
@@ -177,9 +179,14 @@
         }
 
         // * If the url suffix is avif or webp, we assume it's an animated webp.
+        if ([_source.url.absoluteString hasSuffix:@"avif"]) {
+            options |= SDWebImageProgressiveLoad;
+        }
+
         if ([_source.url.absoluteString hasSuffix:@"webp"] || [_source.url.absoluteString hasSuffix:@"avif"]) {
             options |= SDWebImageProgressiveLoad;
         }
+
 
         switch (_source.cacheControl) {
             case FFFCacheControlWeb:
@@ -200,6 +207,7 @@
         }
         self.hasCompleted = NO;
         self.hasErrored = NO;
+
 
         [self downloadImage: _source options: options context: context];
     } else if (_defaultSource) {
