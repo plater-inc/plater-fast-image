@@ -2,6 +2,12 @@
 #import <SDWebImage/UIImage+MultiFormat.h>
 #import <SDWebImage/UIView+WebCache.h>
 
+#import <SDWebImage/SDImageCoder.h>
+#import <SDImageAVIFCoder.h>
+#import <SDImageWebPCoder.h>
+
+static BOOL didAddManagers = NO;
+
 @interface FFFastImageView ()
 
 @property(nonatomic, assign) BOOL hasSentOnLoadStart;
@@ -14,12 +20,22 @@
 
 @end
 
+
 @implementation FFFastImageView
 
 - (id) init {
     self = [super init];
     self.resizeMode = RCTResizeModeCover;
     self.clipsToBounds = YES;
+    if (!didAddManagers) {
+        didAddManagers = YES;
+        [SDImageCodersManager.sharedManager addCoder:SDImageAVIFCoder.sharedCoder];
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"14.0" )) {
+            [SDImageCodersManager.sharedManager addCoder:SDImageAWebPCoder.sharedCoder];
+        } else {
+            [SDImageCodersManager.sharedManager addCoder:SDImageWebPCoder.sharedCoder];
+        }
+    }
     return self;
 }
 
@@ -150,7 +166,6 @@
             return;
         }
 
-
         // Set headers.
         NSDictionary* headers = _source.headers;
         SDWebImageDownloaderRequestModifier* requestModifier = [SDWebImageDownloaderRequestModifier requestModifierWithBlock: ^NSURLRequest* _Nullable (NSURLRequest* _Nonnull request) {
@@ -162,7 +177,6 @@
             return [mutableRequest copy];
         }];
         SDWebImageContext* context = @{SDWebImageContextDownloadRequestModifier: requestModifier};
-
 
         // Set priority.
         SDWebImageOptions options = SDWebImageRetryFailed | SDWebImageHandleCookies;
@@ -178,15 +192,16 @@
                 break;
         }
 
-        // * If the url suffix is avif or webp, we assume it's an animated webp.
-        if ([_source.url.absoluteString hasSuffix:@"avif"]) {
+        if (
+            // *
+            // * If the url suffix is avif or webp, we assume it's an animated webp.
+            // *
+            [_source.url.absoluteString hasSuffix:@"webp"] ||
+            [_source.url.absoluteString hasSuffix:@"avif"] ||
+            [_source.url.absoluteString hasSuffix:@"gif"]
+        ) {
             options |= SDWebImageProgressiveLoad;
         }
-
-        if ([_source.url.absoluteString hasSuffix:@"webp"] || [_source.url.absoluteString hasSuffix:@"avif"]) {
-            options |= SDWebImageProgressiveLoad;
-        }
-
 
         switch (_source.cacheControl) {
             case FFFCacheControlWeb:
@@ -207,7 +222,6 @@
         }
         self.hasCompleted = NO;
         self.hasErrored = NO;
-
 
         [self downloadImage: _source options: options context: context];
     } else if (_defaultSource) {
