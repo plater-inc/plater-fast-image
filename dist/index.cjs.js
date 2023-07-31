@@ -119,6 +119,8 @@ FastImage.resizeMode = resizeMode;
 FastImage.cacheControl = cacheControl;
 FastImage.priority = priority;
 
+FastImage.addCoders = () => reactNative.NativeModules.FastImageView.addCoders();
+
 FastImage.preload = sources => reactNative.NativeModules.FastImageView.preload(sources);
 
 FastImage.clearMemoryCache = () => reactNative.NativeModules.FastImageView.clearMemoryCache();

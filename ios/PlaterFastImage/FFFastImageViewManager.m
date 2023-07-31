@@ -28,7 +28,7 @@ RCT_REMAP_VIEW_PROPERTY(tintColor, imageColor, UIColor)
 RCT_EXPORT_METHOD(addCoders)
 {
     [SDImageCodersManager.sharedManager addCoder:SDImageAVIFCoder.sharedCoder];
-    [SDImageCodersManager.sharedManager addCoder:SDImageAVIFCoder.sharedCoder];
+    [SDImageCodersManager.sharedManager addCoder:SDImageWebPCoder.sharedCoder];
 }
 
 RCT_EXPORT_METHOD(preload:(nonnull NSArray<FFFastImageSource *> *)sources)

@@ -1,6 +1,6 @@
 {
   "name": "plater-fast-image",
-  "version": "8.7.0",
+  "version": "8.7.2",
   "description": "🚩 FastImage, performant React Native image component.",
   "keywords": ["cache", "cached", "fastimage", "image", "priority"],
   "homepage": "https://github.com/plater-inc/plater-fast-image",

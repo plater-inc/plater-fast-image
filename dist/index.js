@@ -112,6 +112,8 @@ FastImage.resizeMode = resizeMode;
 FastImage.cacheControl = cacheControl;
 FastImage.priority = priority;
 
+FastImage.addCoders = () => NativeModules.FastImageView.addCoders();
+
 FastImage.preload = sources => NativeModules.FastImageView.preload(sources);
 
 FastImage.clearMemoryCache = () => NativeModules.FastImageView.clearMemoryCache();

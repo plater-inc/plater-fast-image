@@ -247,6 +247,8 @@ FastImage.cacheControl = cacheControl
 
 FastImage.priority = priority
 
+FastImage.addCoders = () => NativeModules.FastImageView.addCoders()
+
 FastImage.preload = (sources: Source[]) =>
   NativeModules.FastImageView.preload(sources)
 
