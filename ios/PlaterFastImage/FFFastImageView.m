@@ -200,6 +200,13 @@ static BOOL didAddManagers = NO;
             [_source.url.absoluteString hasSuffix:@"avif"] ||
             [_source.url.absoluteString hasSuffix:@"gif"]
         ) {
+            // !!
+            // !! +---------+
+            // !! | WARNING |
+            // !! +---------+
+            // !! Removing this flag degrades performance for gifs
+            // !! and other animated types signfiicantly.
+            // !!
             options |= SDWebImageProgressiveLoad;
         }
 
