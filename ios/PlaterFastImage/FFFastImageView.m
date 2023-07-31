@@ -200,7 +200,7 @@ static BOOL didAddManagers = NO;
             [_source.url.absoluteString hasSuffix:@"avif"] ||
             [_source.url.absoluteString hasSuffix:@"gif"]
         ) {
-            options |= SDWebImageProgressiveLoad;
+            // options |= SDWebImageProgressiveLoad;
         }
 
         switch (_source.cacheControl) {
